@@ -3,16 +3,16 @@ const { loginUser } = require("../login/login.controller");
 var router = express.Router();
 
 const { getAllUser, getUserById, postUser } = require("./users.controller");
-// const { auth } = require("../../helper/auth");
+const { authJwt } = require("../../helper/authJwt");
 
-// router.get("/profile", auth, (req, res) => {
-//   res.json({
-//     message: "Hallo user",
-//     user: req.body,
-//   });
-// });
+router.get("/profile", authJwt, (req, res) => {
+  res.json({
+    message: `Hello ${req.body.name}`,
+    user: req.body,
+  });
+});
 
-/* GET users listing. */
+// routes
 router.get("/", getAllUser);
 router.get("/:id", getUserById);
 router.post("/", postUser);

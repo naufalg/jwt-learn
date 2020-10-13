@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 
 const { User } = require("../../models/models.index");
 
+
 module.exports = {
   getAllUser: (req, res) => {
     User.find()
@@ -33,33 +34,35 @@ module.exports = {
 
   //   register user first using post
   postUser: async (req, res) => {
+    console.log("Model User",User);
     // const userCheck = await User.findOne({ email: req.body.email });
     // if (userCheck) {
     //   res.json({
     //     message: "email used already created an account",
     //   });
     // } else {
-      // console.log("User", User
-      const salt = bcrypt.genSaltSync(7);
-      const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+    // console.log("User", User
+    const salt = await bcrypt.genSalt(7);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    console.log("req.body",req.body);
 
-      let userInput = {
-        ...req.body,
-        password: hashedPassword,
-      };
-      console.log(userData);
+    let userInput = {
+      ...req.body,
+      password: hashedPassword,
+    };
+    console.log(userInput);
 
-      userCreated = await User.create(userInput);
+    let userCreated = await User.create(userInput);
 
-      try {
-        res.json({
-          message: "success create data user with hashed password",
-          userCreated,
-        });
-      } catch (err) {
-        console.log(err);
-        res.status(500).send(err);
-    //   }
+    try {
+      res.json({
+        message: "success create data user with hashed password",
+        userCreated,
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(err);
+      //   }
     }
   },
 };

@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { SECRET_KEY } = require("../../config/config.index");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -14,7 +15,10 @@ module.exports = {
           userCheck.password
         );
         if (passwordCheck) {
-          const token = jwt.sign(userCheck.toObject(), process.env.SECRET_KEY);
+          const token = jwt.sign(
+            userCheck.toObject(),
+            SECRET_KEY || process.env.SECRET_KEY
+          );
           res.json({
             message: "login success",
             token,

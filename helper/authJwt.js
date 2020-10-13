@@ -23,6 +23,5 @@ module.exports = {
       res.json("token is not valid")
       console.log("token is not valid");
     }
-    // "Bearer xxxxxxx"
   }
 }

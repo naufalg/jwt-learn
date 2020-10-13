@@ -1,4 +1,9 @@
-const { PORT, MONGODB_URI_CLOUD, MONGODB_URI_LOCAL } = require("./environment");
+const {
+  PORT,
+  MONGODB_URI_CLOUD,
+  MONGODB_URI_LOCAL,
+  SECRET_KEY,
+} = require("./environment");
 const dbMongo = require("./dbConfig");
 
 module.exports = {
@@ -6,4 +11,5 @@ module.exports = {
   PORT,
   MONGODB_URI_CLOUD,
   MONGODB_URI_LOCAL,
+  SECRET_KEY,
 };
