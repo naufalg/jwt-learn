@@ -21,6 +21,7 @@ module.exports = {
           );
           res.json({
             message: "login success",
+            // isLoggedIn: true,
             token,
           });
         } else {
